@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    echo "Welcome to the Laravel application!";
-});
+Route::get('/', [MainController::class, 'startGame'])->name('home');
+Route::post('/', [MainController::class,'prepareGame'])->name('prepareGame');
