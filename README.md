@@ -1,66 +1,167 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌍 Countries & Capitals Quiz
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Um quiz interativo de países e capitais desenvolvido em Laravel que testa seus conhecimentos de geografia mundial.
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-10.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.x-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Sobre o Projeto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O Countries & Capitals Quiz é uma aplicação web educativa que permite aos usuários testarem seus conhecimentos sobre as capitais dos países do mundo. O sistema oferece uma experiência gamificada com pontuação e resultados detalhados.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### ✨ Funcionalidades
 
-## Learning Laravel
+- 🎮 **Quiz Interativo**: Perguntas dinâmicas sobre países e suas capitais
+- ⚙️ **Configuração Personalizada**: Escolha de 3 a 30 questões por quiz
+- 🔀 **Questões Aleatórias**: Perguntas e alternativas embaralhadas a cada jogo
+- 📊 **Sistema de Pontuação**: Acompanhamento de acertos e erros em tempo real
+- 🎯 **Resultados Detalhados**: Porcentagem final e estatísticas completas
+- 🔐 **Respostas Criptografadas**: Segurança nas respostas para evitar manipulação
+- 📱 **Design Responsivo**: Interface adaptável para diferentes dispositivos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 🗺️ Base de Dados
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+O quiz inclui informações de **todos os países do mundo** com suas respectivas capitais, totalizando mais de 190 países.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Tecnologias Utilizadas
 
-## Laravel Sponsors
+- **Backend**: Laravel 10.x
+- **Frontend**: Blade Templates + Bootstrap 5
+- **Linguagem**: PHP 8.1+
+- **Sessões**: Sistema de sessões do Laravel para persistência de dados
+- **Criptografia**: Laravel Crypt para segurança das respostas
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📁 Estrutura do Projeto
 
-### Premium Partners
+```
+app/
+├── Http/Controllers/
+│   └── MainController.php       # Controller principal do quiz
+├── View/Components/             # Componentes Blade reutilizáveis
+│   ├── Answer.php              # Componente de resposta
+│   └── Question.php            # Componente de pergunta
+└── app_data.php                # Base de dados dos países
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+resources/views/
+├── components/                  # Templates dos componentes
+│   ├── answer.blade.php        # Template da resposta
+│   ├── question.blade.php      # Template da pergunta
+│   └── main-layout.blade.php   # Layout principal
+├── home.blade.php              # Página inicial
+├── game.blade.php              # Página do jogo
+├── answer_result.blade.php     # Resultado de cada resposta
+└── final_results.blade.php     # Resultados finais
+```
 
-## Contributing
+## 🎮 Como Funciona
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Início**: O usuário escolhe quantas perguntas quer responder (3-30)
+2. **Preparação**: O sistema seleciona países aleatórios e gera 4 alternativas para cada
+3. **Jogo**: Para cada país apresentado, o usuário escolhe a capital correta
+4. **Feedback**: Após cada resposta, mostra se acertou ou errou
+5. **Resultado**: Ao final, apresenta estatísticas completas e porcentagem de acertos
 
-## Code of Conduct
+## 🛠️ Instalação
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Pré-requisitos
 
-## Security Vulnerabilities
+- PHP 8.1 ou superior
+- Composer
+- Node.js e NPM (para assets)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Passos para Instalação
 
-## License
+1. **Clone o repositório**
+```bash
+git clone https://github.com/thak1996/quiz.git
+cd quiz
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. **Instale as dependências do PHP**
+```bash
+composer install
+```
+
+3. **Configure o ambiente**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. **Instale as dependências do Node.js**
+```bash
+npm install
+npm run build
+```
+
+5. **Inicie o servidor**
+```bash
+php artisan serve
+```
+
+6. **Acesse a aplicação**
+```
+http://localhost:8000
+```
+
+## 🎯 Rotas Principais
+
+| Rota | Método | Descrição |
+|------|--------|-----------|
+| `/` | GET | Página inicial do quiz |
+| `/` | POST | Preparação do jogo |
+| `/game` | GET | Página do jogo |
+| `/answer/{answer}` | GET | Processamento da resposta |
+| `/next_question` | GET | Próxima questão |
+| `/show_results` | GET | Resultados finais |
+
+## 🔧 Componentes Principais
+
+### MainController
+- `startGame()`: Exibe a página inicial
+- `prepareGame()`: Configura o quiz com validação
+- `game()`: Gerencia a exibição das perguntas
+- `answer()`: Processa as respostas
+- `showResults()`: Calcula e exibe resultados
+
+### Componentes Blade
+- **Answer**: Renderiza as opções de resposta
+- **Question**: Exibe a pergunta atual e progresso
+- **Main-Layout**: Layout base da aplicação
+
+## 📊 Sistema de Pontuação
+
+- **Acertos**: Incrementados a cada resposta correta
+- **Erros**: Calculados automaticamente (total - acertos)
+- **Porcentagem**: (acertos ÷ total) × 100
+- **Cores**: Verde para ≥50%, vermelho para <50%
+
+## 🔒 Segurança
+
+- Respostas criptografadas para evitar manipulação via URL
+- Validação de entrada para número de questões
+- Proteção CSRF em formulários
+- Sessões seguras para persistência de dados
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Para contribuir:
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 👨‍💻 Autor
+
+**Franklyn Viana** - [thak1996](https://github.com/thak1996)
+
+---
+
+⭐ Se este projeto te ajudou, considere dar uma estrela no GitHub!
