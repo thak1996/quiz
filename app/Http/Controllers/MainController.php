@@ -152,7 +152,15 @@ class MainController extends Controller
 
     public function showResults()
     {
-        echo 'Mostrar resultados do jogo';
-        dd(session()->all());
+        $correct_answers = session('correct_answers');
+        $total_questions = session('total_questions');
+        $wrong_answers = $total_questions - $correct_answers;
+
+        return view('final_results')->with([
+            'correct_answers' => $correct_answers,
+            'wrong_answers' => $wrong_answers,
+            'total_questions' => $total_questions,
+            'percentage' => round(($correct_answers / $total_questions) * 100, 2),
+        ]);
     }
 }

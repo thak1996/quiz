@@ -1,5 +1,5 @@
 <x-main-layout pageTitle="'Countries & Capitals Quiz'">
-    <div class="container" style="max-width: 500px;">
+    <div class="container" style="max-width: 1000px;">
 
         <x-question :country="$country" :currentQuestion="$currentQuestion" :totalQuestions="$totalQuestions" />
 
