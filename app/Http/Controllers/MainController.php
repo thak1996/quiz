@@ -23,21 +23,29 @@ class MainController extends Controller
     {
         $request->validate(
             [
-                'total_questions' => 'required|integer|min:3|max:30'
+                'total_questions' => 'required|integer|min:3|max:30',
             ],
             [
                 'total_questions.required' => 'Total questions are required.',
                 'total_questions.integer' => 'Total questions must be an integer.',
                 'total_questions.min' => 'Total questions must be at least :min.',
-                'total_questions.max' => 'Total questions cannot exceed :max.'
-            ]
+                'total_questions.max' => 'Total questions cannot exceed :max.',
+            ],
         );
 
         $total_questions = intval($request->input('total_questions'));
 
         $quiz = $this->prepareQuiz($total_questions);
 
-        dd($quiz);
+        session()->put([
+            'quiz' => $quiz,
+            'total_questions' => $total_questions,
+            'current_question' => 1,
+            'correct_answers' => 0,
+            'wrong_answers' => 0,
+        ]);
+
+        return redirect()->route('game');
     }
 
     private function prepareQuiz(int $total_questions)
@@ -65,5 +73,24 @@ class MainController extends Controller
         }
 
         return $questions;
+    }
+
+    public function game(): View
+    {
+        $quiz = session('quiz');
+        $total_questions = session('total_questions');
+        $current_question = session('current_question') - 1;
+
+        $answers = $quiz[$current_question]['wrong_answers'];
+        $answers[] = $quiz[$current_question]['correct_answer'];
+
+        shuffle($answers);
+
+        return view('game')->with([
+            'country' => $quiz[$current_question]['country'],
+            'totalQuestions' => $total_questions,
+            'currentQuestion' => $quiz[$current_question]['question_number'],
+            'answers' => $answers,
+        ]);
     }
 }

@@ -16,3 +16,5 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'startGame'])->name('home');
 Route::post('/', [MainController::class,'prepareGame'])->name('prepareGame');
+
+Route::get('/game', [MainController::class, 'startGame'])->name('game');
