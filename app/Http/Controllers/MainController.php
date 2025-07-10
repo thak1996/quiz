@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class MainController extends Controller
 {
@@ -92,5 +93,45 @@ class MainController extends Controller
             'currentQuestion' => $quiz[$current_question]['question_number'],
             'answers' => $answers,
         ]);
+    }
+
+    public function answer($enc_answer)
+    {
+        try {
+            $answer = Crypt::decryptString($enc_answer);
+        } catch (\Exception $e) {
+            return redirect()->route('game');
+        }
+
+        $quiz = session('quiz');
+        $current_question = session('current_question') - 1;
+        $correct_answer = $quiz[$current_question]['correct_answer'];
+
+        $correct_answers = session('correct_answers');
+        $wrong_answers = session('wrong_answers');
+
+        if ($answer == $correct_answer) {
+            $correct_answers++;
+            $quiz[$current_question]['correct'] = true;
+        } else {
+            $wrong_answers++;
+            $quiz[$current_question]['correct'] = false;
+        }
+
+        session()->put([
+            'quiz' => $quiz,
+            'correct_answers' => $correct_answers,
+            'wrong_answers' => $wrong_answers,
+        ]);
+
+        $data = [
+            'country' => $quiz[$current_question]['country'],
+            'correctAnswer' => $correct_answer,
+            'choice_answer' => $answer,
+            'currentQuestion' => $quiz[$current_question]['question_number'],
+            'totalQuestions' => session('total_questions'),
+        ];
+
+        return view('answer_result')->with($data);
     }
 }
